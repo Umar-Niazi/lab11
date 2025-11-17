@@ -5,22 +5,31 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                // put build commands here later
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Testing..'
-                // put test commands here later
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                // put deploy commands here later
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished (success or failure).'
+        }
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed!'
         }
     }
 }
