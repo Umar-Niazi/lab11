@@ -1,33 +1,36 @@
 pipeline {
     agent any
 
+    environment {
+        APP_VERSION = '1.0.0'
+    }
+
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo "Building version ${APP_VERSION}"
             }
         }
 
-    stage('Test') {
-        when {
-            expression { env.BRANCH_NAME == 'main' }
+        stage('Test') {
+            when {
+                expression { env.BRANCH_NAME == 'main' }
+            }
+            steps {
+                echo "Testing version ${APP_VERSION}"
+            }
         }
-        steps {
-            echo 'Testing.. (only on main branch)'
-        }
-    }
-
 
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo "Deploying version ${APP_VERSION}"
             }
         }
     }
 
     post {
         always {
-            echo 'Pipeline finished (success or failure).'
+            echo "Pipeline finished for version ${APP_VERSION}"
         }
         success {
             echo 'Build succeeded!'
