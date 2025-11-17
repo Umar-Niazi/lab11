@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'     
+        maven 'Maven3'   
     }
 
     environment {
@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -v'  // on Ubuntu/Linux agents
+                bat 'mvn -v'
                 echo "Building version ${APP_VERSION}"
             }
         }
