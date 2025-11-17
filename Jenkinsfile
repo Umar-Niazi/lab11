@@ -5,6 +5,14 @@ pipeline {
         maven 'Maven3'   
     }
 
+    parameters {
+        booleanParam(
+            name: 'executeTests',
+            defaultValue: true,
+            description: 'Run Test stage?'
+        )
+    }
+
     environment {
         APP_VERSION = '1.0.0'
     }
@@ -12,17 +20,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvn -v'
+                sh 'mvn -v'
                 echo "Building version ${APP_VERSION}"
             }
         }
 
         stage('Test') {
             when {
-                expression { env.BRANCH_NAME == 'main' }
+                expression { params.executeTests }
             }
             steps {
-                echo "Testing version ${APP_VERSION}"
+                echo "Executing tests for version ${APP_VERSION}"
             }
         }
 
