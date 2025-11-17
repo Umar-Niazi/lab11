@@ -8,11 +8,15 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
+    stage('Test') {
+        when {
+            expression { env.BRANCH_NAME == 'main' }
         }
+        steps {
+            echo 'Testing.. (only on main branch)'
+        }
+    }
+
 
         stage('Deploy') {
             steps {
