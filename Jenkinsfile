@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'   
+        maven 'Maven3'   // or whatever your Maven tool is called
     }
 
     parameters {
@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -v'
+                bat 'mvn -v'                       // <-- changed here
                 echo "Building version ${APP_VERSION}"
             }
         }
