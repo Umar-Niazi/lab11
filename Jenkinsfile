@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'     
+    }
+
     environment {
         APP_VERSION = '1.0.0'
     }
@@ -8,6 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'mvn -v'  // on Ubuntu/Linux agents
                 echo "Building version ${APP_VERSION}"
             }
         }
